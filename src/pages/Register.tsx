@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
@@ -6,6 +7,7 @@ import AuthCard from '../components/AuthCard'
 import Alert from '../components/Alert'
 
 export default function Register() {
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -23,40 +25,40 @@ export default function Register() {
       setError(err.message)
     } else {
       if (data.session) {
-        setSuccess('Account created. Redirecting…')
+        setSuccess(t('register.success_created'))
         setTimeout(() => navigate('/', { replace: true }), 800)
       } else {
-        setSuccess('Account created. Please check your email to verify your account.')
+        setSuccess(t('register.verify'))
       }
     }
     setLoading(false)
   }
 
   return (
-    <AuthCard title="Create your account" subtitle="Get started with the CMS">
+    <AuthCard title={t('register.title')} subtitle={t('register.subtitle')}>
       <form onSubmit={onSubmit} className="space-y-4">
         {error && <Alert kind="error">{error}</Alert>}
         {success && <Alert kind="success">{success}</Alert>}
 
         <div className="space-y-1">
-          <label className="block text-sm text-gray-700">Email</label>
+          <label className="block text-sm text-gray-700">{t('login.email')}</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
+            placeholder={t('login.placeholder_email')}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black/70"
             required
           />
         </div>
 
         <div className="space-y-1">
-          <label className="block text-sm text-gray-700">Password</label>
+          <label className="block text-sm text-gray-700">{t('login.password')}</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="At least 6 characters"
+            placeholder={t('register.password_placeholder')}
             minLength={6}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black/70"
             required
@@ -68,12 +70,12 @@ export default function Register() {
           disabled={loading}
           className="w-full rounded-lg bg-black text-white py-2 font-medium disabled:opacity-50"
         >
-          {loading ? 'Creating…' : 'Create account'}
+          {loading ? t('register.creating') : t('register.create_account')}
         </button>
 
         <p className="text-sm text-gray-500 text-center">
-          Already have an account?{' '}
-          <Link to="/login" className="text-gray-900 hover:underline">Sign in</Link>
+          {t('register.already')}?{' '}
+          <Link to="/login" className="text-gray-900 hover:underline">{t('register.sign_in')}</Link>
         </p>
       </form>
     </AuthCard>

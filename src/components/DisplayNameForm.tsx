@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from './AuthProvider'
 import { supabase } from '../lib/supabase'
 
 export default function DisplayNameForm() {
   const { user } = useAuth()
+  const { t } = useTranslation()
   const [name, setName] = useState<string>(user?.user_metadata?.display_name || '')
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
@@ -38,7 +40,7 @@ export default function DisplayNameForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-3">
-      <label className="block text-sm font-medium text-gray-700">Display name</label>
+      <label className="block text-sm font-medium text-gray-700">{t('profile.display_title')}</label>
       <input
         type="text"
         value={name}
@@ -49,7 +51,7 @@ export default function DisplayNameForm() {
         placeholder="Your name"
       />
       <div className="flex items-center justify-between">
-        <p className="text-xs text-gray-500">Up to 50 characters. This appears on your public profile.</p>
+        <p className="text-xs text-gray-500">{t('profile.display_hint')}</p>
         <span className={`text-xs ${tooLong ? 'text-red-600' : 'text-gray-500'}`}>{trimmed.length}/50</span>
       </div>
       <div className="flex items-center gap-3">
@@ -58,7 +60,7 @@ export default function DisplayNameForm() {
           disabled={saving || invalid}
           className="inline-flex items-center rounded-lg bg-black text-white px-4 py-2.5 text-sm font-medium shadow-sm hover:opacity-90 active:opacity-80 disabled:opacity-50"
         >
-          {saving ? 'Saving…' : 'Save'}
+          {saving ? t('profile.saving') : t('profile.save')}
         </button>
         {message && <span className="text-xs px-2 py-1 rounded bg-green-50 text-green-700 border border-green-200">{message}</span>}
         {error && <span className="text-xs px-2 py-1 rounded bg-red-50 text-red-700 border border-red-200">{error}</span>}

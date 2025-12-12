@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthProvider'
 
@@ -13,6 +14,7 @@ export default function AvatarUploader({ onUploaded, onDelete, hasAvatar }: Prop
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { t } = useTranslation()
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -51,7 +53,7 @@ export default function AvatarUploader({ onUploaded, onDelete, hasAvatar }: Prop
         <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M12 5v14M5 12h14" />
         </svg>
-        {uploading ? 'Uploading…' : 'Change avatar'}
+        {uploading ? t('profile.uploading') : t('profile.change_avatar')}
       </label>
       {onDelete && (
         <button
@@ -63,7 +65,7 @@ export default function AvatarUploader({ onUploaded, onDelete, hasAvatar }: Prop
           <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M3 6h18M8 6v14a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6M10 6V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2" />
           </svg>
-          Remove
+          {t('profile.remove')}
         </button>
       )}
       {error && <span className="text-xs px-2 py-1 rounded bg-red-50 text-red-700 border border-red-200">{error}</span>}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import AuthOnly from '../components/AuthOnly'
 import AvatarUploader from '../components/AvatarUploader'
 import DisplayNameForm from '../components/DisplayNameForm'
@@ -15,6 +16,7 @@ export default function ProfileSettings() {
 }
 
 function Content() {
+  const { t, i18n } = useTranslation()
   const { avatarUrl: initialAvatarUrl, displayName } = useProfileMeta()
   const [avatarUrl, setAvatarUrl] = useState<string | null>(initialAvatarUrl)
   const [avatarError, setAvatarError] = useState<string | null>(null)
@@ -50,34 +52,34 @@ function Content() {
   return (
     <div className="max-w-3xl mx-auto space-y-10 py-8 px-4 sm:px-6">
       <div>
-        <h1 className="text-4xl font-semibold tracking-tight">Profile settings</h1>
-        <p className="text-gray-600 mt-2 leading-relaxed">Manage your avatar and display name for your public profile.</p>
+        <h1 className="text-4xl font-semibold tracking-tight">{t('profile.settings_title')}</h1>
+        <p className="text-gray-600 mt-2 leading-relaxed">{t('profile.settings_desc')}</p>
       </div>
 
       <Card className="border-gray-200 shadow-sm overflow-hidden rounded-xl">
         <CardHeader className="p-6 bg-gradient-to-b from-gray-50 to-white">
-          <CardTitle>Profile image</CardTitle>
-          <CardDescription>Upload a square image for the best result.</CardDescription>
+          <CardTitle>{t('profile.image_title')}</CardTitle>
+          <CardDescription>{t('profile.image_desc')}</CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           <div className="flex flex-col items-center text-center md:grid md:grid-cols-[auto,1fr] md:items-center md:text-left gap-6 md:gap-8">
             <div className="relative group mx-auto md:mx-0">
               <img
                 src={avatarUrl || 'https://placehold.co/144x144?text=Avatar'}
-                alt="Avatar"
+                alt={t('profile.avatar_alt')}
                 className="w-32 h-32 md:w-36 md:h-36 rounded-full object-cover ring-2 ring-gray-200 ring-offset-2 ring-offset-white shadow transition-transform duration-200 group-hover:scale-105"
               />
             </div>
             <div className="space-y-3">
-              <div>
+              <div className={i18n.dir() === 'rtl' ? 'text-right' : ''}>
                 <p className="text-xl font-medium leading-tight">{displayName}</p>
-                <p className="text-sm text-gray-500">This is your public avatar and name.</p>
+                <p className="text-sm text-gray-500">{t('profile.public_note')}</p>
               </div>
               <div className="flex items-center justify-center md:justify-start gap-3">
                 <AvatarUploader onUploaded={handleAvatarUploaded} onDelete={handleAvatarDelete} hasAvatar={!!avatarUrl} />
               </div>
               {avatarError && <p className="text-xs text-red-600">{avatarError}</p>}
-              <p className="text-xs text-gray-500">PNG, JPG. Recommended 256×256+.</p>
+              <p className={`text-xs text-gray-500 ${i18n.dir() === 'rtl' ? 'text-center' : ''}`}>{t('profile.hint_formats')}</p>
             </div>
           </div>
         </CardContent>
@@ -85,8 +87,8 @@ function Content() {
 
       <Card className="border-gray-200 shadow-sm overflow-hidden rounded-xl">
         <CardHeader className="p-6 bg-gradient-to-b from-gray-50 to-white">
-          <CardTitle>Display name</CardTitle>
-          <CardDescription>This will appear on your posts and public profile.</CardDescription>
+          <CardTitle>{t('profile.display_title')}</CardTitle>
+          <CardDescription>{t('profile.display_desc')}</CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           <DisplayNameForm />

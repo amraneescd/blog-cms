@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from './AuthProvider'
@@ -10,6 +11,7 @@ export default function UserMenu() {
   const [imgError, setImgError] = useState(false)
 
   const { avatarUrl, displayName } = useProfileMeta()
+  const { t, i18n } = useTranslation()
 
   function getInitials(name: string) {
     const parts = name.trim().split(/\s+/).filter(Boolean)
@@ -72,11 +74,11 @@ export default function UserMenu() {
       {open && (
         <div
           role="menu"
-          aria-label="User menu"
+          aria-label={t('menu.aria')}
           className="absolute right-0 mt-2 w-56 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md z-50"
         >
           <div className="px-4 py-3">
-            <p className="text-sm text-gray-500">Signed in as</p>
+            <p className="text-sm text-gray-500">{t('menu.signed_in_as')}</p>
             <p className="text-sm font-medium truncate">{displayName}</p>
           </div>
           <div className="border-t">
@@ -86,17 +88,17 @@ export default function UserMenu() {
               className="block px-4 py-2.5 text-sm hover:bg-gray-50"
               onClick={() => setOpen(false)}
             >
-              Profile settings
+              {t('menu.profile_settings')}
             </Link>
             <button
               role="menuitem"
-              className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50"
+              className={`w-full ${i18n.dir() === 'rtl' ? 'text-right' : 'text-left'} px-4 py-2.5 text-sm text-red-600 hover:bg-red-50`}
               onClick={() => {
                 setOpen(false)
                 void signOut()
               }}
             >
-              Sign out
+              {t('menu.sign_out')}
             </button>
           </div>
         </div>
