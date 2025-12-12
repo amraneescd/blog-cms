@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "Blog CMS"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "menu": {
+    "aria": "User menu",
+    "signed_in_as": "Signed in as",
+    "profile_settings": "Profile settings",
+    "sign_out": "Sign out"
+  },
+  "home": {
+    "welcome": "Welcome"
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "placeholder_email": "you@example.com",
+    "placeholder_password": "••••••••",
+    "signing_in": "Signing in…",
+    "sign_in": "Sign in",
+    "no_account": "Don’t have an account?",
+    "create_one": "Create one",
+    "success": "Signed in successfully. Redirecting…"
+  },
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Get started with the CMS",
+    "password_placeholder": "At least 6 characters",
+    "creating": "Creating…",
+    "create_account": "Create account",
+    "already": "Already have an account?",
+    "sign_in": "Sign in",
+    "success_created": "Account created. Redirecting…",
+    "verify": "Account created. Please check your email to verify your account."
+  },
+  "profile": {
+    "settings_title": "Profile settings",
+    "settings_desc": "Manage your avatar and display name for your public profile.",
+    "image_title": "Profile image",
+    "image_desc": "Upload a square image for the best result.",
+    "avatar_alt": "Avatar",
+    "public_note": "This is your public avatar and name.",
+    "hint_formats": "PNG, JPG. Recommended 256×256+.",
+    "display_title": "Display name",
+    "display_desc": "This will appear on your posts and public profile.",
+    "display_hint": "Up to 50 characters. This appears on your public profile.",
+    "uploading": "Uploading…",
+    "change_avatar": "Change avatar",
+    "remove": "Remove",
+    "saving": "Saving…",
+    "save": "Save"
+  }
+,
+  "lang": {
+    "en": "EN",
+    "ar": "AR"
+  }
+}
